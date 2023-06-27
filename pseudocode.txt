@@ -3,7 +3,7 @@
  * @Email: amirjavadi25@gmail.com
  * @Date: 2023-06-26 21:11:59 
  * @Last Modified by: Someone
- * @Last Modified time: 2023-06-26 22:33:33
+ * @Last Modified time: 2023-06-27 00:08:06
  * @Description: Pseudocode
  */
 
@@ -18,3 +18,22 @@
 6. use the fetch API to get the data, and then present it on the page 
 7. save search history of previous locations checked 
 8. HTML and CSS  
+
+=====
+- need to save search results in variable and then add the query selectors in js to add the card element to those results 
+
+
+** API GEO RESPONSE **
+http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
+
+http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
+
+q = City name, state code, country code
+appid - API Key
+limit - number of locations in the API Response (up to 5)
+
+
+Coordinates by zip/ post code:
+
+
+- set up if else in case they search via zip code 

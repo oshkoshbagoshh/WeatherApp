@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>Weather App</title>
+    <!-- CSS Reset  -->
+    <link rel="stylesheet" href="./assets/css/reset.css">
   </head>
   <header>
     <header <div class="p-3 mb-2 bg-primary text-white">
@@ -29,7 +31,7 @@
               <div class="mb-3">
                 <input type="text" id="q" class="form-control" id="city-input" placeholder="City Name">
               </div>
-              <button type="submit" class="btn btn-primary">Search</button>
+              <button type="submit" class="btn btn-primary" id="fetch-button">Search</button>
             </fieldset>
           </form>
 
@@ -41,23 +43,31 @@
             <div class="card-body">
               <h5 class="card-title">City Name Placeholder</h5>
             </div>
-            <p class="card-text">
+            <p class="card-text text-body-secondary">
               Insert weather data here
             </p>
 
           </div>
         </div>
       </div>
-      <h4> Search results for: <span id="searched"> Chicago </span></h4>
+      <!-- <h4> Search results for: <span id="searched"> Chicago </span></h4> -->
+      <div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="city-buttons"></div>
 
 
 
-      
+      <!-- INSERT 5 DAY FORECAST HERE  -->
+      <br>
+      <hr>
+      <h4> 5 Day Forecast: </h4>
 
 
 
 <!-- # END OF BODY  -->
     </main>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/scripts/script.js"></script>
   </body>
 
