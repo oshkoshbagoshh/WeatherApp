@@ -1,0 +1,57 @@
+body{
+    background-color: rgb(237, 227, 227);
+    font-family: arial, sans-serif;
+}
+
+.navbar{
+    margin-bottom: 20px;
+}
+
+.container{
+    /* width: 80%;
+    margin: auto;
+    overflow: hidden; */
+    max-width: 800px;
+    margin: 0;
+
+}
+
+#city-search{
+    margin-bottom: 20px;
+}
+
+.container button{
+    margin-top: 10px;
+}
+
+#city-list{
+    max-height: 200px;
+    overflow-y: hidden;
+    border: none;
+}
+
+
+.card-group .card{
+    flex: 1 0 auto;
+    margin: 5px;
+    margin-right: 5px ;
+    background-color: #343a40;
+    color: rgb(255, 255, 255);
+}
+
+.card-group .card .list-group-item{
+    background-color: #343a40;
+    color: white;
+    margin-right: 5px;
+    border: none;
+}
+
+
+#city-buttons .btn{
+    margin: 10px;
+    /* padding: 40px; */
+}
+
+.card, .card-body, .card-title, .card-text{
+    border: none;
+}
