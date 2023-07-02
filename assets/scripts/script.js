@@ -29,8 +29,12 @@ const cardBody = document.querySelector(".card-group");
 
 
 // API URL and key: 
+const APIurl = "https://api.openweathermap.org/data/2.5/weather?q=";
+
 
 const APIKey =  "3766791156393ba8d86e980934844d3e";
+
+
 
 
 //hide the weather data untill search is performed
@@ -38,71 +42,115 @@ const APIKey =  "3766791156393ba8d86e980934844d3e";
 
 // search history
 
+/// Search history
+const searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+
 // search the local storage for the search history
-const searchHistory =  json.parse(localStorage.getItem("searchHistory")) || [];
+// need to stringify the JSON
+document.getElementById("clear-history").addEventListener("click", function () {
+    searchHistory = [];
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+
+    while (cityButtons.firstChild) {
+        cityButtons.removeChild(cityButtons.firstChild);
+    }
+});
+
+
 
 
 // add search histtory buttons 
+searchHistory.forEach(function(cityName) {
+    let cityButton = document.createElement("button");
+    cityButton.className = "btn btn-secondary btn-lg btn-block";
+    cityButton.textContent = cityName;
+    // add event listener to the button
+    cityButton.addEventListener("click", function() {
+        citySearchForm[0].value = this.textContent
+        citySearchForm.dispatchEvent(new Event("submit"));
+
+    });
+    cityButtons.appendChild(cityButton);
 
 
 
+//************************ */
+// event listener for search form
+citySearchForm.addEventListener("submit", function(event) {
+    event.preventDefault ();
+const cityName = citySearchForm[0].value;
 
 
+// add the city to the search history
+let newCityButton = document.createElement("button");
+newCityButton.className = "btn btn-secondary btn-lg btn-block";
 
-// // var API KEY 
-// var APIkey = '1015e99ac996eb49b15b505b9353b975';
+newCityButton.textContent = cityName;
 
-
-
-
-function getWeather() { 
-
-
-    var cityName = document.querySelector("city-input").value;
-// Set up a city name Variable 
-// var cityName = 'Chicago'
-// let city = "";
-
-
-    var weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${APIkey}`
-    var weatherAPI = `api.openweathermap.org/data/2.5/weather?id=524901&appid=${APIkey}`;
-    // console.log(weatherURL);
-    // console.log(weatherAPI);
-
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey;
-
-
+newCityButton.addEventListener("click", function() {
+    citySearchForm[0].value = this.textContent;
+    citySearchForm.dispatchEvent(new Event("submit"));
+        });
+        cityButtons.appendChild(newCityButton);
+    });
     
-    fetch(queryURL) 
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-        
-        //loop over the data and create a new element for each item in the array
-            for (var i = 0; i < data.length; i++) { 
-                var createEl = document.createElement("div");
-                var createCard = document.createElement("card");
-                var createP = document.createElement("p");
-                var createImg = document.createElement("img");
 
-                //set the content of the new elements to the data from the API
-                createP.textContent = data[i].name;
+    // ************************ 
 
 
-        }
-     
-    })
-    .catch(error => console.error(error));
-}
-fetchButton.addEventListener('click', getWeather);
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`)
+        .then(response => response.json())
+        .then(data => {
+            const iconCode = data.weather[0].icon;
+            const iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
+            weatherCard.innerHTML = `
+        <h2>${data.name}, ${data.sys.country}<img src="${iconUrl}" alt="Weather icon"></h2>
+        <p>Temperature: ${data.main.temp} F</p>
+        <p>Humidity: ${data.main.humidity} %</p>
+        <p>Wind Speed: ${data.wind.speed} mph</p>
+        `;
+        });
 
-// fetch(queryURL) 
-// function getWeather() {
-   
-// fetch(queryURL)
-//   .then(response => response.json())
-//   .then(data => console.log(data))
-//   .catch(error => console.error(error));
-// }
+    // 5 day forecast
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&units=imperial`)
+        .then(response => response.json())
+        .then(data => {
+            forecast.innerHTML = "";
+            for (let i = 0; i < data.list.length; i += 8) {
+                const date = new Date(data.list[i].dt_txt);
+                const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' }); 
+                const iconCode = data.list[i].weather[0].icon;
+                const iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
+                forecast.innerHTML += ` 
+        <div class="card text-bg-dark mb-3">
+        <div class="card-header">${dayOfWeek} <img src="${iconUrl}" alt="Weather icon"></div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Temperature: ${data.list[i].main.temp} F</li>
+                <li class="list-group-item">Humidity: ${data.list[i].main.humidity} %</li>
+                <li class="list-group-item">Wind Speed: ${data.list[i].wind.speed} mph</li>
+            </ul>
+        </div>
+    </div>
+        `;
+            }
+        });
+});
+
+cityButtons.addEventListener("input", function (event) {
+    citySearchForm[0].value = event.target.value;
+    citySearchForm.dispatchEvent(new Event("submit"));
+});
+
+// clear search history
+document.getElementById("clear-history").addEventListener("click", function () {
+    searchHistory = [];
+    localStorage.setItem("search-history", JSON.stringify(searchHistory));
+
+    while (cityButtons.firstChild) {
+        cityButtons.removeChild(cityButtons.firstChild);
+    }
+});
+
+// *************************
