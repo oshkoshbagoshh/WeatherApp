@@ -15,24 +15,32 @@
 
 
 // set up the buttons 
-const citySearchForm = document.querySelector("#city-search");
+let citySearchForm = document.querySelector("#city-search");
 
 // set up the buttons
-const cityButtons = document.querySelector("#city-buttons");
+let  cityButtons = document.querySelector("#city-buttons");
 
 
 // set up the card
-const card = document.querySelector(".card");
+let  card = document.querySelector(".card");
 
 // set up the card body 
-const cardBody = document.querySelector(".card-group");
+let  cardBody = document.querySelector(".card-group");
+
+
+// set up the weather card
+let  weatherCard = document.querySelector("#weather-card");
+
+
+// set up the forecast
+let  forecast = document.querySelector("#forecast");
 
 
 // API URL and key: 
 const APIurl = "https://api.openweathermap.org/data/2.5/weather?q=";
 
 
-const APIKey =  "3766791156393ba8d86e980934844d3e";
+const apiKey =  "3766791156393ba8d86e980934844d3e";
 
 
 
@@ -43,7 +51,7 @@ const APIKey =  "3766791156393ba8d86e980934844d3e";
 // search history
 
 /// Search history
-const searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+let  searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
 
 // search the local storage for the search history
