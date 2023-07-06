@@ -51,16 +51,19 @@
       <div class="row">
         <!-- search for city and city options underneath-->
         <div class="col-md-3">
-          <form id="city-search">
+          <form id="city-search" autocomplete="on">
             <label for="city-search" class="form-label">Search for a city</label>
+            <br>
             <input type="text" class="form-control" placeholder="Enter a city name">
             <!-- add submit button -->
             <button type="submit" class="btn btn-primary" style="margin-top: 40px; margin-left: 10px;">Submit</button>
             <!-- add clear history button -->
+            <br>
             <button id="clear-history" type="button" class="btn btn-secondary"
               style="margin-top: 40px; margin-left: 10px;">Clear History</button>
           </form>
 
+          <br>
           <div class="btn-group-vertical" role="group" aria-label="Vertical button group" id="city-buttons"></div>
 
         </div>
